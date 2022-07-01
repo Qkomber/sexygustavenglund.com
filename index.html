@@ -8,6 +8,8 @@
     let i = 0
     let imgs = [document.getElementById('one'), document.getElementById('two')];
     function flash() {
+      let col = Math.floor(Math.random()*16777215);
+      document.body.style.background = "#"+col.toString(16)
       imgs[i%2].style.height = '0px';
       i++;
       imgs[i%2].style.height = '100%';
