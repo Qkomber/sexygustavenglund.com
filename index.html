@@ -1,6 +1,18 @@
 <head>
 </head>
 <body>
-  <img src=gustav_ass.jpg style="width: 100%; height: auto">
-  <img src=gustav.jpg style="width: 100%; height: auto">
+  <img src=gustav_ass.jpg style="width: 100%; height: auto" id="one">
+  <img src=gustav.jpg style="width: 100%; height: auto" id="two">
+
+  <script>
+    let i = 0
+    let imgs = [document.getElementById('one'), document.getElementById('two')];
+    function flash() {
+      imgs[i%2].style.height = '0px';
+      i++;
+      imgs[i%2].style.height = '100%';
+      setTimeout(flash, 1000);
+    }
+    setTimeout(flash, 5000);
+  </script>
 </body>
