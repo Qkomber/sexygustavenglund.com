@@ -11,8 +11,10 @@
       imgs[i%2].style.height = '0px';
       i++;
       imgs[i%2].style.height = '100%';
+      let rot = Math.floor(Math.random()*360)
+      imgs[i%2].style.transform = "rotate("+rot+"deg)"
       setTimeout(flash, 1000);
     }
-    setTimeout(flash, 5000);
+    setTimeout(flash, 1000);
   </script>
 </body>
