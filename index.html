@@ -1,22 +1,65 @@
 <head>
 </head>
-<body>
-  <img src=gustav_ass.jpg style="width: 100%; height: auto" id="one">
-  <img src=gustav.jpg style="width: 100%; height: auto" id="two">
 
+<body>
+  <div id="click" style="height: 100%">
+  </div>
+  <img src=gustav_ass.jpg style="width: 100%; height: 0" id="one">
+  <img src=gustav.jpg style="width: 100%; height: 0" id="two">
+
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     let i = 0
     let imgs = [document.getElementById('one'), document.getElementById('two')];
     function flash() {
-      let col = Math.floor(Math.random()*16777215);
-      document.body.style.background = "#"+col.toString(16)
-      imgs[i%2].style.height = '0px';
+      let col = Math.floor(Math.random() * 16777215);
+      document.body.style.background = "#" + col.toString(16)
+      imgs[i % 2].style.height = '0px';
       i++;
-      imgs[i%2].style.height = '100%';
-      let rot = Math.floor(Math.random()*360)
-      imgs[i%2].style.transform = "rotate("+rot+"deg)"
+      imgs[i % 2].style.height = '100%';
+      let rot = Math.floor(Math.random() * 360)
+      imgs[i % 2].style.transform = "rotate(" + rot + "deg)"
       setTimeout(flash, 100);
     }
-    setTimeout(flash, 1000);
+    function backup() {
+      if (document.getElementById("clickMe") == null) {
+        click.style.height = "0";
+        flash();
+      }
+    }
+    setTimeout(backup, 2000);
+
+    function onYouTubeIframeAPIReady() {
+      var click = document.getElementById("click");
+
+      var playerDiv = document.createElement("div");
+      playerDiv.setAttribute("id", "youtube-player");
+      click.appendChild(playerDiv);
+
+      var player = new YT.Player(
+        "youtube-player",
+        {
+          height: "0",
+          width: "0",
+          videoId: "A8IIPi5p788",
+          events: {
+            onReady: function (e) {
+              var clickMe = document.createElement("h1");
+              clickMe.setAttribute("id", "clickMe");
+              clickMe.textContent = "Click me";
+              clickMe.style.fontSize = "20vw";
+              click.appendChild(clickMe);
+            }
+          }
+        }
+      );
+
+      click.onclick = function () {
+        player.playVideo();
+        flash();
+        document.getElementById("clickMe").style.fontSize = "0";
+        click.style.height = "0";
+      };
+    }
   </script>
 </body>
